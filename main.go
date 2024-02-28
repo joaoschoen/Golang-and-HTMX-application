@@ -1,6 +1,11 @@
 package main
 
 import (
+	"encoding/json"
+	"os"
+	router "restaurant/api_router"
+	"restaurant/x_api/board"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -15,8 +20,30 @@ func main() {
 	e.Use(middleware.RemoveTrailingSlash())
 
 	// router.InitRoutes(e)
+
+	// main app
 	e.Static("/public", "public")
 	e.File("/", "public/index.html")
+
+	// board
+	e.Static("/board", "board")
+	e.File("/boardPage", "board/index.html")
+	// board
+	e.Static("/board2", "board2")
+	e.File("/boardPage2", "board2/index.html")
+
+	e.GET("/table", func(c echo.Context) error {
+		table := board.GenBoard()
+		return c.HTML(200, table)
+	})
+
+	router.InitRoutes(e)
+
+	data, err := json.MarshalIndent(e.Routes(), "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	os.WriteFile("routes.json", data, 0644)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))

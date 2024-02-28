@@ -1,13 +1,13 @@
 package router
 
 import (
-	"restaurant/view"
+	"restaurant/api_view"
 
 	"github.com/labstack/echo/v4"
 )
 
 func InitRoutes(server *echo.Echo) {
 
-	// view.UserRoutes(server)
-	view.UIRoutes(server)
+	api_view.ComponentRoutes(server)
+	// view.UIRoutes(server)
 }

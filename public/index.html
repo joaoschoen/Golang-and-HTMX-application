@@ -11,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>App</title>
   </head>
-  <body>
-    <div id="overlay" class="flex flex-col absolute -z-10 items-center justify-center w-[100vw] h-[100vh] bg-Malibu bg-opacity-50">
+  <body class="bg-slate-900 text-white">
+    <div id="overlay" class="flex flex-col absolute -z-10 items-center justify-center w-[100vw] h-[100vh]">
       this should be an overlay =)
     </div>
     <div
@@ -23,8 +23,9 @@
     ></div>
     <div
       id="main"
-      hx-get="/public/main/index.html"
-      hx-swap="outerHTML"
+      class="flex flex-col p-8"
+      hx-get="/public/pages/clients.html"
+      hx-swap="innerHTML"
       hx-trigger="load"
     ></div>
     <div
