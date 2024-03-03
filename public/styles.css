@@ -597,12 +597,24 @@ h3 {
   display: table;
 }
 
+.h-1\/5 {
+  height: 20%;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
 .h-28 {
   height: 7rem;
 }
 
 .h-32 {
   height: 8rem;
+}
+
+.h-\[0vh\] {
+  height: 0vh;
 }
 
 .h-\[100px\] {
@@ -629,12 +641,24 @@ h3 {
   width: 0.25rem;
 }
 
+.w-1\/5 {
+  width: 20%;
+}
+
+.w-16 {
+  width: 4rem;
+}
+
 .w-32 {
   width: 8rem;
 }
 
 .w-40 {
   width: 10rem;
+}
+
+.w-\[0vw\] {
+  width: 0vw;
 }
 
 .w-\[100px\] {
@@ -724,6 +748,16 @@ h3 {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
+.bg-slate-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
+}
+
 .bg-slate-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
@@ -769,6 +803,11 @@ h3 {
   line-height: 2.5rem;
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -800,6 +839,11 @@ div#main{
 
 footer{
   margin-top: auto;
+}
+
+.hover\:bg-slate-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 
 .active\:bg-slate-500:active {

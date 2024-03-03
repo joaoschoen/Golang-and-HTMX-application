@@ -64,17 +64,16 @@ func tableRow(id int16, name string, value float32) string {
 			fmt.Sprintf("<td>%d</td>\n", id) +
 			fmt.Sprintf("<td>%s</td>\n", name) +
 			fmt.Sprintf("<td>%.2f</td>\n", value) +
-			`<td>
-				<button 
-					hx-post="/components/overlay/addValue"
-					hx-target="#overlay"
-					hx-swap="innerHTML" ` +
-			fmt.Sprintf(`hx-vals='{"id":%d}'`, id) +
-			`class="w-32 h-32 rounded-full active:bg-slate-500 hover:bg-slate-400 bg-slate-300 text-black"
-				>
-					+
-				</button>
-			</td>
-		</tr>`
+			"<td>\n" +
+			"<button\n" +
+			"hx-post=\"/components/overlay/add_value\"\n" +
+			"hx-target=\"#overlay\"\n" +
+			"hx-swap=\"outerHTML\"\n" +
+			fmt.Sprintf(`hx-vals='{"id":"%d","name":"%s","value":"%.2f"}'`, id, name, value) +
+			`class="w-16 h-16 rounded-full active:bg-slate-500 hover:bg-slate-400 bg-slate-300 text-black">` +
+			"+\n" +
+			"</button>\n" +
+			"</td>\n" +
+			"</tr>\n"
 	return tableHead
 }
