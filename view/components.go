@@ -1,7 +1,7 @@
 package api_view
 
 import (
-	"restaurant/api_controller/admin"
+	"restaurant/controller/admin"
 
 	"github.com/labstack/echo/v4"
 )

@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"os"
-	router "restaurant/api_router"
+	"restaurant/router"
 	"restaurant/x_api/board"
 
 	"github.com/labstack/echo/v4"
