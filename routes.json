@@ -1,7 +1,37 @@
 [
   {
     "method": "GET",
+    "path": "/",
+    "name": "github.com/labstack/echo/v4.(*Echo).File.common.file.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/boardPage",
+    "name": "github.com/labstack/echo/v4.(*Echo).File.common.file.func1"
+  },
+  {
+    "method": "GET",
     "path": "/board2*",
+    "name": "github.com/labstack/echo/v4.(*Echo).Static.StaticDirectoryHandler.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/boardPage2",
+    "name": "github.com/labstack/echo/v4.(*Echo).File.common.file.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/components/admin/user_list",
+    "name": "restaurant/controller/admin.GetUserList"
+  },
+  {
+    "method": "GET",
+    "path": "/public*",
+    "name": "github.com/labstack/echo/v4.(*Echo).Static.StaticDirectoryHandler.func1"
+  },
+  {
+    "method": "GET",
+    "path": "/board*",
     "name": "github.com/labstack/echo/v4.(*Echo).Static.StaticDirectoryHandler.func1"
   },
   {
@@ -12,36 +42,6 @@
   {
     "method": "POST",
     "path": "/components/overlay/add_value",
-    "name": "restaurant/api_controller/admin.AddValue"
-  },
-  {
-    "method": "GET",
-    "path": "/components/admin/user_list",
-    "name": "restaurant/api_controller/admin.GetUserList"
-  },
-  {
-    "method": "GET",
-    "path": "/public*",
-    "name": "github.com/labstack/echo/v4.(*Echo).Static.StaticDirectoryHandler.func1"
-  },
-  {
-    "method": "GET",
-    "path": "/",
-    "name": "github.com/labstack/echo/v4.(*Echo).File.common.file.func1"
-  },
-  {
-    "method": "GET",
-    "path": "/board*",
-    "name": "github.com/labstack/echo/v4.(*Echo).Static.StaticDirectoryHandler.func1"
-  },
-  {
-    "method": "GET",
-    "path": "/boardPage",
-    "name": "github.com/labstack/echo/v4.(*Echo).File.common.file.func1"
-  },
-  {
-    "method": "GET",
-    "path": "/boardPage2",
-    "name": "github.com/labstack/echo/v4.(*Echo).File.common.file.func1"
+    "name": "restaurant/controller/admin.AddValue"
   }
 ]

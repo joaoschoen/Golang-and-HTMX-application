@@ -1,4 +1,4 @@
-package api_view
+package view
 
 import (
 	"net/http"

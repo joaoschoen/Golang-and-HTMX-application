@@ -1,12 +1,11 @@
 (
-  export PORT="8080" &&
-  nodemon --watch './**/*.go' \
+  npx nodemon --watch './**/*.go' \
   --ext 'go,html,css' \
   --signal SIGTERM \
   --exec 'go run main.go'
 )&
 (
-  nodemon --watch './**/*' \
+  npx nodemon --watch './**/*' \
   --ext 'html,css,go' \
   --signal SIGTERM \
   --exec "tailwind -i 'styles.css' -o 'public/styles.css'"
