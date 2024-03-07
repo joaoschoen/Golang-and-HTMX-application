@@ -1,0 +1,16 @@
+<tr>
+  <td>${id}</td>
+  <td>${name}</td>
+  <td>${value}</td>
+  <td>
+    <button
+      hx-post="/components/overlay/add_value"
+      hx-target="#overlay"
+      hx-swap="outerHTML"
+      hx-vals='{"id":"${id}","name":"${name}","value":"${value}"}'
+      class="w-16 h-16 rounded-full active:bg-slate-500 hover:bg-slate-400 bg-slate-300 text-black"
+    >
+      +
+    </button>
+  </td>
+</tr>

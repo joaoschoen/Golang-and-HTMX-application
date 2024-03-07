@@ -2,17 +2,24 @@ package admin
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
-	"log"
 	"net/http"
+	"os"
+	"strconv"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func GetUserList(context echo.Context) error {
-	println("??")
-	var tableRows string = tableHead()
+	var table string
+	// Read table head template
+	table, err := tableHead()
+	if err != nil {
+		return context.String(http.StatusInternalServerError, "Error reading template")
+	}
 
 	// Open SQLite database
 	db, err := sql.Open("sqlite3", "test.db")
@@ -32,48 +39,57 @@ func GetUserList(context echo.Context) error {
 	for rows.Next() {
 		var id int16
 		var name string
-		var value float32
+		var value float64
 
 		err = rows.Scan(&id, &name, &value)
 
 		if err != nil {
-			log.Fatal(err)
+			context.String(500, "Error while building table")
 		}
-		tableRows += tableRow(id, name, value)
+		newRow, err := tableRow(id, name, value)
+		if err != nil {
+			context.String(500, "Error while building table")
+		}
+		table += newRow
 	}
 
 	// Set Content-Type header
 	context.Response().Header().Set(echo.HeaderContentType, echo.MIMETextPlain)
 	// Send CSV data as text
-	return context.HTML(http.StatusOK, tableRows)
+	return context.HTML(http.StatusOK, table)
 }
 
-func tableHead() string {
-	tableHead := "<tr>\n" +
-		"<th class=\"w-[10%]\">Id</th>\n" +
-		"<th class=\"w-[50%]\">Nome</th>\n" +
-		"<th class=\"w-[30%]\">Valor</th>\n" +
-		"<th class=\"w-[10%]\">Ações</th>\n" +
-		"</tr>\n"
-	return tableHead
+func tableHead() (string, error) {
+	cwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return "", errors.New("internal server error")
+	}
+	data, err := os.ReadFile(cwd + "/controller/admin/table/table_head.html")
+	if err != nil {
+		println(err.Error())
+		return "", errors.New("internal server error")
+
+	}
+	return string(data), nil
 }
 
-func tableRow(id int16, name string, value float32) string {
-	tableHead :=
-		"<tr>\n" +
-			fmt.Sprintf("<td>%d</td>\n", id) +
-			fmt.Sprintf("<td>%s</td>\n", name) +
-			fmt.Sprintf("<td>%.2f</td>\n", value) +
-			"<td>\n" +
-			"<button\n" +
-			"hx-post=\"/components/overlay/add_value\"\n" +
-			"hx-target=\"#overlay\"\n" +
-			"hx-swap=\"outerHTML\"\n" +
-			fmt.Sprintf(`hx-vals='{"id":"%d","name":"%s","value":"%.2f"}'`, id, name, value) +
-			`class="w-16 h-16 rounded-full active:bg-slate-500 hover:bg-slate-400 bg-slate-300 text-black">` +
-			"+\n" +
-			"</button>\n" +
-			"</td>\n" +
-			"</tr>\n"
-	return tableHead
+func tableRow(id int16, name string, value float64) (string, error) {
+	cwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return "", errors.New("internal server error")
+	}
+	data, err := os.ReadFile(cwd + "/controller/admin/table/table_row.html")
+	if err != nil {
+		println(err.Error())
+		return "", errors.New("internal server error")
+
+	}
+	row := string(data)
+	row = strings.Replace(row, "${id}", strconv.FormatInt(int64(id), 10), -1)
+	row = strings.Replace(row, "${name}", name, 1)
+	row = strings.Replace(row, "${value}", strconv.FormatFloat(value, 'f', -1, 32), -1)
+
+	return row, nil
 }

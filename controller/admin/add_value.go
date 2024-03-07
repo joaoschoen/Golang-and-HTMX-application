@@ -21,7 +21,7 @@ func AddValue(context echo.Context) error {
 		fmt.Println("Error:", err)
 		return context.String(500, "internal server error")
 	}
-	data, err := os.ReadFile(cwd + "/api_controller/admin/add_value.html")
+	data, err := os.ReadFile(cwd + "/controller/admin/add_value.html")
 	if err != nil {
 		println(err.Error())
 		return context.String(500, "internal server error")
