@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"os"
 	"restaurant/router"
-	"restaurant/x_api/board"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -19,23 +18,20 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(middleware.RemoveTrailingSlash())
 
-	// router.InitRoutes(e)
-
 	// main app
 	e.Static("/public", "public")
 	e.File("/", "public/index.html")
 
 	// board
-	e.Static("/board", "board")
-	e.File("/boardPage", "board/index.html")
-	// board
-	e.Static("/board2", "board2")
-	e.File("/boardPage2", "board2/index.html")
-
-	e.GET("/table", func(c echo.Context) error {
-		table := board.GenBoard()
-		return c.HTML(200, table)
-	})
+	// e.Static("/board", "board")
+	// e.File("/boardPage", "board/index.html")
+	// // board
+	// e.Static("/board2", "board2")
+	// e.File("/boardPage2", "board2/index.html")
+	// e.GET("/table", func(c echo.Context) error {
+	// 	table := board.GenBoard()
+	// 	return c.HTML(200, table)
+	// })
 
 	router.InitRoutes(e)
 

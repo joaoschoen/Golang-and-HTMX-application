@@ -610,6 +610,10 @@ button {
   height: 2.5rem;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-32 {
   height: 8rem;
 }
@@ -634,6 +638,10 @@ button {
   width: 2.5rem;
 }
 
+.w-16 {
+  width: 4rem;
+}
+
 .w-40 {
   width: 10rem;
 }
@@ -642,8 +650,20 @@ button {
   width: 0vw;
 }
 
+.w-\[10\%\] {
+  width: 10%;
+}
+
 .w-\[100vw\] {
   width: 100vw;
+}
+
+.w-\[30\%\] {
+  width: 30%;
+}
+
+.w-\[50\%\] {
+  width: 50%;
 }
 
 .w-fit {
