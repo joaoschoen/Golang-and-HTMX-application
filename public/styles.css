@@ -610,10 +610,6 @@ button {
   height: 2.5rem;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .h-32 {
   height: 8rem;
 }
@@ -636,10 +632,6 @@ button {
 
 .w-10 {
   width: 2.5rem;
-}
-
-.w-16 {
-  width: 4rem;
 }
 
 .w-40 {
@@ -767,6 +759,10 @@ button {
 
 .p-8 {
   padding: 2rem;
+}
+
+.text-start {
+  text-align: start;
 }
 
 .text-2xl {

@@ -31,8 +31,9 @@ func AddValue(context echo.Context) error {
 	if err := context.Bind(&user); err != nil {
 		return context.JSON(http.StatusBadRequest, "Error while parsing received data")
 	}
-	content = strings.Replace(content, "${name}", user.Name, 1)
-	content = strings.Replace(content, "${value}", user.Value, 1)
+	println(user.Name)
+	content = strings.Replace(content, "${name}", user.Name, -1)
+	content = strings.Replace(content, "${value}", user.Value, -1)
 
 	return context.HTML(200, content)
 }

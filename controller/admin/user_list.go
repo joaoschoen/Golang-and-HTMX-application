@@ -28,13 +28,24 @@ func GetUserList(context echo.Context) error {
 	}
 	defer db.Close()
 
-	// Perform a query
+	// Get user list information
 	rows, err := db.Query("SELECT id,name,value FROM users")
 	if err != nil {
 		return context.String(http.StatusInternalServerError, "Error querying database")
 	}
 	defer rows.Close()
 
+	// Read template file
+	cwd, err := os.Getwd()
+	if err != nil {
+		return context.String(500, "Error while building table")
+	}
+	data, err := os.ReadFile(cwd + "/controller/admin/table/table_row.html")
+	if err != nil {
+		return context.String(500, "Error while building table")
+
+	}
+	template := string(data)
 	// Collumns
 	for rows.Next() {
 		var id int16
@@ -46,10 +57,7 @@ func GetUserList(context echo.Context) error {
 		if err != nil {
 			context.String(500, "Error while building table")
 		}
-		newRow, err := tableRow(id, name, value)
-		if err != nil {
-			context.String(500, "Error while building table")
-		}
+		newRow := tableRow(template, id, name, value)
 		table += newRow
 	}
 
@@ -74,22 +82,11 @@ func tableHead() (string, error) {
 	return string(data), nil
 }
 
-func tableRow(id int16, name string, value float64) (string, error) {
-	cwd, err := os.Getwd()
-	if err != nil {
-		fmt.Println("Error:", err)
-		return "", errors.New("internal server error")
-	}
-	data, err := os.ReadFile(cwd + "/controller/admin/table/table_row.html")
-	if err != nil {
-		println(err.Error())
-		return "", errors.New("internal server error")
+func tableRow(template string, id int16, name string, value float64) string {
+	newRow := template
+	newRow = strings.Replace(newRow, "${id}", strconv.FormatInt(int64(id), 10), -1)
+	newRow = strings.Replace(newRow, "${name}", name, -1)
+	newRow = strings.Replace(newRow, "${value}", strconv.FormatFloat(value, 'f', 2, 32), -1)
 
-	}
-	row := string(data)
-	row = strings.Replace(row, "${id}", strconv.FormatInt(int64(id), 10), -1)
-	row = strings.Replace(row, "${name}", name, 1)
-	row = strings.Replace(row, "${value}", strconv.FormatFloat(value, 'f', -1, 32), -1)
-
-	return row, nil
+	return newRow
 }
