@@ -10,7 +10,7 @@ func AdminRoutes(server *echo.Echo) {
 	router := server.Group("/api")
 	// Overlay
 	userRoutes := router.Group("/user")
-	userRoutes.GET("/update", user.UpdateValue)
+	userRoutes.POST("/update", user.UpdateValue)
 	// adminRoutes.GET("/add_value", admin.AddValue)
 
 }

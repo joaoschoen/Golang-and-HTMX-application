@@ -1,8 +1,18 @@
 [
   {
+    "method": "POST",
+    "path": "/components/overlay/add_value",
+    "name": "restaurant/controller/admin.UpdateValue"
+  },
+  {
     "method": "GET",
     "path": "/components/admin/user_list",
     "name": "restaurant/controller/admin.GetUserList"
+  },
+  {
+    "method": "POST",
+    "path": "/api/user/update",
+    "name": "restaurant/controller/user.UpdateValue"
   },
   {
     "method": "GET",
@@ -13,10 +23,5 @@
     "method": "GET",
     "path": "/",
     "name": "github.com/labstack/echo/v4.(*Echo).File.common.file.func1"
-  },
-  {
-    "method": "POST",
-    "path": "/components/overlay/add_value",
-    "name": "restaurant/controller/admin.AddValue"
   }
 ]

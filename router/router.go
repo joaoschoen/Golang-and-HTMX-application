@@ -9,5 +9,6 @@ import (
 func InitRoutes(server *echo.Echo) {
 
 	view.ComponentRoutes(server)
+	view.AdminRoutes(server)
 	// view.UIRoutes(server)
 }

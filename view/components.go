@@ -10,7 +10,7 @@ func ComponentRoutes(server *echo.Echo) {
 	components := server.Group("/components")
 	// Overlay
 	overlayRoutes := components.Group("/overlay")
-	overlayRoutes.POST("/add_value", admin.AddValue)
+	overlayRoutes.POST("/add_value", admin.UpdateValue)
 	// Admin
 	adminRoutes := components.Group("/admin")
 	adminRoutes.GET("/user_list", admin.GetUserList)

@@ -13,6 +13,36 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+type User struct {
+	Id    string `form:"id"`
+	Name  string `form:"name"`
+	Value string `form:"value"`
+}
+
+func UpdateValue(context echo.Context) error {
+	cwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return context.String(500, "internal server error")
+	}
+	data, err := os.ReadFile(cwd + "/controller/admin/update_user_modal/template.html")
+	if err != nil {
+		println(err.Error())
+		return context.String(500, "internal server error")
+	}
+	content := string(data)
+	var user User
+	if err := context.Bind(&user); err != nil {
+		return context.JSON(http.StatusBadRequest, "Error while parsing received data")
+	}
+	println(user.Name)
+	content = strings.Replace(content, "${id}", user.Id, -1)
+	content = strings.Replace(content, "${name}", user.Name, -1)
+	content = strings.Replace(content, "${currentValue}", user.Value, -1)
+
+	return context.HTML(200, content)
+}
+
 func GetUserList(context echo.Context) error {
 	var table string
 	// Read table head template
@@ -40,7 +70,7 @@ func GetUserList(context echo.Context) error {
 	if err != nil {
 		return context.String(500, "Error while building table")
 	}
-	data, err := os.ReadFile(cwd + "/controller/admin/table/table_row.html")
+	data, err := os.ReadFile(cwd + "/controller/admin/user_list/table_row.html")
 	if err != nil {
 		return context.String(500, "Error while building table")
 
@@ -73,7 +103,7 @@ func tableHead() (string, error) {
 		fmt.Println("Error:", err)
 		return "", errors.New("internal server error")
 	}
-	data, err := os.ReadFile(cwd + "/controller/admin/table/table_head.html")
+	data, err := os.ReadFile(cwd + "/controller/admin/user_list/table_head.html")
 	if err != nil {
 		println(err.Error())
 		return "", errors.New("internal server error")
