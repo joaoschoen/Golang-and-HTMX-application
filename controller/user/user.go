@@ -61,8 +61,9 @@ func UpdateValue(context echo.Context) error {
 		return context.String(http.StatusInternalServerError, "Error parsing float")
 	}
 	updatedValue := currentValue + additionalValue
+
+	// UPDATE USER
 	updateQuery := fmt.Sprintf(`UPDATE users SET value = %.2f WHERE Id=%s;`, updatedValue, user.Id)
-	println(updateQuery)
 	updateResult, err := db.Exec(updateQuery)
 	if err != nil {
 		return context.String(http.StatusInternalServerError, err.Error())
@@ -71,6 +72,7 @@ func UpdateValue(context echo.Context) error {
 	if err != nil {
 		return context.String(500, "Error while updating user data")
 	}
+	// ingore daqui para baixo, abaixo é a logica do template do HTMX
 	if affected == 1 {
 		// Read template file
 		cwd, err := os.Getwd()
